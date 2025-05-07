@@ -1,18 +1,26 @@
 <script setup>
 import { ref } from 'vue'
 
-const activities = ref(["olahraga","Makan","Tidur"])
+const activities = ref([
+  { text: "olahraga", done: false },
+  { text: "Makan", done: false },
+  { text: "Tidur", done: false }
+])
 const newActivity = ref('')
 
 function addActivity() {
   if (newActivity.value.trim() !== '') {
-    activities.value.push(newActivity.value.trim())
+    activities.value.push({ text: newActivity.value.trim(), done: false })
     newActivity.value = ''
   }
 }
 
 function removeActivity(index) {
   activities.value.splice(index, 1)
+}
+
+function toggleDone(activity) {
+  activity.done = !activity.done
 }
 </script>
 
@@ -22,7 +30,8 @@ function removeActivity(index) {
     <button @click="addActivity">Tambah Kegiatan</button>
     <ul>
       <li v-for="(activity, index) in activities" :key="index">
-        {{ activity }}
+        <input type="checkbox" v-model="activity.done" />
+        {{ activity.text }}
         <button @click="removeActivity(index)">x</button>
       </li>
     </ul>
