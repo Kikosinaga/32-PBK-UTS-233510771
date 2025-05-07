@@ -31,7 +31,7 @@ function toggleDone(activity) {
     <ul>
       <li v-for="(activity, index) in activities" :key="index">
         <input type="checkbox" v-model="activity.done" />
-        {{ activity.text }}
+        <span :style="{ textDecoration: activity.done ? 'line-through' : 'none' }">{{ activity.text }}</span>
         <button @click="removeActivity(index)">x</button>
       </li>
     </ul>
