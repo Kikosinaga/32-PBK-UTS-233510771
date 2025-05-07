@@ -10,6 +10,10 @@ function addActivity() {
     newActivity.value = ''
   }
 }
+
+function removeActivity(index) {
+  activities.value.splice(index, 1)
+}
 </script>
 
 <template>
@@ -17,7 +21,10 @@ function addActivity() {
     <input type="text" v-model="newActivity" placeholder="Masukkan kegiatan" />
     <button @click="addActivity">Tambah Kegiatan</button>
     <ul>
-      <li v-for="(activity, index) in activities" :key="index">{{ activity }}</li>
+      <li v-for="(activity, index) in activities" :key="index">
+        {{ activity }}
+        <button @click="removeActivity(index)">x</button>
+      </li>
     </ul>
   </div>
 </template>
